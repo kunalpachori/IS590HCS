@@ -82,7 +82,9 @@ export default function DetailsScreen(props) {
 
         <List>
           <ListItem itemDivider>
-            <Text>{'Items'}</Text>
+            <Text>
+              {'Items: '} {request.items.length}
+            </Text>
           </ListItem>
           {request.items.map(item => (
             <ListItem key={item}>
