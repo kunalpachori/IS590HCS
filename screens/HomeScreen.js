@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
+
 import {
   Badge,
   Container,
@@ -8,9 +10,10 @@ import {
   Text,
   Button,
   Left,
-  Right,
   Body,
   View,
+  Header,
+  Title,
 } from 'native-base';
 
 export default function HomeScreen(props) {
@@ -45,56 +48,62 @@ export default function HomeScreen(props) {
               <Left>
                 <Body>
                   <Text>{request.date}</Text>
+                  <Text note>{request.deliveryWindow}</Text>
                   <Badge warning>
                     <Text>{request.status}</Text>
                   </Badge>
                 </Body>
               </Left>
-              <Right>
-                <Body>
-                  <Text note>{request.deliveryWindow}</Text>
-                  <Text note>{request.instructions}</Text>
-                </Body>
-              </Right>
-            </CardItem>
-            <CardItem footer style={{ justifyContent: 'space-evenly' }}>
-              <Button
-                block
-                rounded
-                warning
-                onPress={() => props.navigation.navigate('New Request')}
-                style={{ marginTop: 20, width: '45%' }}>
-                <Text>Modify request</Text>
-              </Button>
-              {request != null && (
-                <Button
-                  onPress={() =>
-                    props.navigation.push('Requests', { remove: true })
-                  }
-                  rounded
-                  danger
-                  style={{ marginTop: 20, width: '45%' }}>
-                  <Text>Cancel request</Text>
-                </Button>
-              )}
             </CardItem>
           </Card>
         )}
 
         {request == null && (
           <View>
-            <Text>You have not added a request</Text>
-            <Button
-              block
-              success
-              rounded
-              onPress={() => props.navigation.navigate('New Request')}
-              style={{ marginTop: 20 }}>
-              <Text>Add a new request</Text>
-            </Button>
+            <Text style={styles.helptext}>You would be able to submit only one request at a time.</Text>
+            <Image style={styles.groceryicon} 
+              source={require('../assets/grocery-delivery.png')}/>
+            <TouchableOpacity onPress={() => props.navigation.navigate('New Request')}>
+              <Image style={styles.logo} 
+                source={require('../assets/add_green.png')}/>
+            </TouchableOpacity>
           </View>
         )}
+        {request != null && (
+          <Button
+          block
+          success
+          onPress={() => props.navigation.navigate('Create New')}
+          style={{ marginTop: 20 }}>
+          <Text>Modify request</Text>
+          </Button>
+
+        )}
+
       </Content>
     </Container>
   );
 }
+
+const styles = StyleSheet.create({
+  helptext:{
+    marginTop: 80,
+    marginLeft: 20,
+    marginRight: 20,
+    fontSize: 25,
+    fontWeight: 'normal',
+    textAlign: 'center',
+  },
+  groceryicon:{
+    marginTop: 30,
+    marginLeft: 120,
+    height: 128,
+    width: 128,
+  },
+  logo: {
+    marginTop: 140,
+    marginLeft: 220,
+    height: 128,
+    width: 128,
+  }
+});
