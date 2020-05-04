@@ -49,11 +49,6 @@ export default function NewRequestScreen(props) {
       text: 'Item',
       qty: 'Qty',
     },
-    {
-      id: 2,
-      text: 'Item',
-      qty: 'Qty',
-    },
   ]);
 
   const [pickerEndDate, setPickerEndDate] = useState(
@@ -123,7 +118,7 @@ export default function NewRequestScreen(props) {
         deliveryWindow: deliveryWindow,
         instructions: instructions,
         items: itemsToSave(itemArr),
-        status: 'pending',
+        status: 'Pending',
       },
     });
   }
@@ -140,7 +135,7 @@ export default function NewRequestScreen(props) {
                 source={require('../assets/back-icon.png')}
               />
             </TouchableOpacity>
-            <Title style={{marginLeft:20}}>Create new request</Title>
+            <Title style={{ marginLeft: 20 }}>Create new request</Title>
           </View>
         </Body>
       </Header>
